@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/29/2019 8:46:58 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LT-94TZ1X2-0836"
+  DTS:CreatorName="PHARMMD\steven.sigmon"
+  DTS:DTSID="{D7C1169B-2B7D-4C8C-9FA3-6028AED62E4A}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="Package"
+  DTS:PackageType="5"
+  DTS:VersionGUID="{5114379F-4302-4B86-8CE7-4BE8360DB3F9}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:Variables />
+  <DTS:Executables />
+</DTS:Executable>
