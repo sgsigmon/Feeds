@@ -1,0 +1,143 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/30/2019 7:39:17 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LT-94TZ1X2-0836"
+  DTS:CreatorName="PHARMMD\steven.sigmon"
+  DTS:DTSID="{8D40EB7F-69C1-41E9-8C81-C4F91D3DDF64}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="05ODSTableLoadCounter"
+  DTS:PackageType="5"
+  DTS:VersionBuild="4"
+  DTS:VersionGUID="{E60B4B38-2DBB-424B-92E0-8C48371625F6}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[005ODS]"
+      DTS:CreationName="ADO.NET:SQL"
+      DTS:DTSID="{2BF64C6A-EC3D-4EC7-A585-96C6D1B8C8A6}"
+      DTS:ObjectName="005ODS">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=P10PMW90PSDE05;Integrated Security=SSPI;Connect Timeout=30;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Execute T-SQL Statement Task"
+      DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+      DTS:Description="Execute T-SQL Statement Task"
+      DTS:DTSID="{8A720C03-064F-41E7-9BDA-7E7559CB821C}"
+      DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute T-SQL Statement Task"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2BF64C6A-EC3D-4EC7-A585-96C6D1B8C8A6}"
+          SQLTask:SqlStatementSource="USE Utilities&#xA;go&#xA;SET ANSI_NULLS ON&#xA;GO&#xA;&#xA;SET QUOTED_IDENTIFIER ON&#xA;GO&#xA;&#xA;SET ANSI_PADDING ON&#xA;GO&#xA;drop table [Utilities].[dbo].SpecificTableRowCounter05&#xA;create table [dbo].SpecificTableRowCounter05(&#xA;[id] [bigint] IDENTITY(1,1) NOT FOR REPLICATION NOT NULL,&#xA;[ServerName] varchar(10) null,&#xA;[DatabaseName] varchar(80) not null,&#xA;[TableName] varchar(100) Not Null,&#xA;[RowCounter] int not null&#xA;) On [PRIMARY]&#xA;Go&#xA;&#xA;&#xA;&#xA;"
+          SQLTask:ServerVersion="9"
+          SQLTask:ExtendedLogging="True"
+          SQLTask:LocalConnectionForLogging=""
+          SQLTask:TaskName=""
+          SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute T-SQL Statement Task 1"
+      DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+      DTS:Description="Execute T-SQL Statement Task"
+      DTS:DTSID="{FB1DF878-D00F-45C6-A072-BF30353F0A5F}"
+      DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute T-SQL Statement Task 1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2BF64C6A-EC3D-4EC7-A585-96C6D1B8C8A6}"
+          SQLTask:SqlStatementSource="use Acumen&#xA;create table #Acumentemp(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #Acumentemp&#xA;&#xA;    select &#xA;&#x9;&#x9;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Acumen',&#xA;&#x9;&#x9;'[Adherence_Bene_Denominator]'  AS table_name,&#x9;count(*) as RowCounter  &#xA;FROM&#x9;[Acumen].[dbo].[Adherence_Bene_Denominator]&#xA;where [Measure_Year] &gt;= year(getdate())-1&#xA;&#xA;------------------------------------------------------&#xA;use Stars_Archive&#xA;create table #StarsArchivetemp(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #StarsArchivetemp&#xA;&#xA;    select &#xA;&#x9;&#x9;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_Archive',&#xA;&#x9;&#x9;'[UHC_Membership]'  AS table_name,&#x9;count(*) as RowCounter &#xA;FROM&#x9;[Stars_Archive].[dbo].[UHC_Membership]&#xA;  where RunYear &gt;= year(getdate())-1&#xA;-----------------------------------------------------------------&#xA;use Stars_Archive&#xA;create table #StarsArchivetemp2(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #StarsArchivetemp2&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_Archive',&#xA;'[UHC_Inpatient_Census_Report]'  AS table_name,&#x9;count(*) as RowCounter &#xA;from&#x9;Stars_Archive.[dbo].[UHC_Inpatient_Census_Report]&#xA;  where RunYear &gt;= year(getdate())-1&#xA;&#xA;&#xA;-----------------------------------------------&#xA;&#xA;use [Stars_Billing]&#xA;create table #StarsBillingtemp(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #StarsBillingtemp&#xA;&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_Billing',&#xA;'[Billing]'  AS table_name,&#x9;count(*) as RowCounter  &#xA;FROM&#x9;[Stars_Billing].[dbo].[Billing]&#xA;  where Billing_Year &gt;= year(getdate())-1&#xA;-------------------------------------------------------&#xA;use [Stars_Call_Lists]&#xA;create table #CallListtemp(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #CallListtemp&#xA;&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_Call_Lists',&#xA;&#x9;&#x9;'[DTP_CNSLD_Call_List]'  AS table_name,&#x9;count(*) as RowCounter  &#xA;FROM&#x9;[Stars_Call_Lists].[dbo].[DTP_CNSLD_Call_List]&#xA;  where year(Campaign_Date) &gt;= year(getdate())-1&#xA;-------------------------------------------------------&#xA;use [Stars_Call_Lists]&#xA;create table #CallListtemp2(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #CallListtemp2&#xA;&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_Call_Lists',&#xA;'[DTP_CNSLD_Fax_List]'  AS table_name,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_Call_Lists].[dbo].[DTP_CNSLD_Fax_List]&#xA; where year(Campaign_Date) &gt;= year(getdate())-1&#xA; &#xA;-------------------------------------------------------&#xA;use [Stars_Call_Lists]&#xA;create table #CallListtemp3(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #CallListtemp3&#xA;&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_Call_Lists',&#xA;'[DTP_Fax_List]'  AS table_name, count(*) as RowCounter &#xA;from&#x9;[Stars_Call_Lists].[dbo].[DTP_Fax_List]&#xA;  where year(Campaign_Date) &gt;= year(getdate())-1&#xA;-------------------------------------------------------&#xA;use [Stars_Call_Lists]&#xA;create table #CallListtemp4(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #CallListtemp4&#xA;&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_Call_Lists',&#xA;'[DTP_StarConnect_Call_List]'  AS table_name,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_Call_Lists].[dbo].[DTP_StarConnect_Call_List]&#xA;  where dtp_Year &gt;= year(getdate())-1&#xA;-------------------------------------------------------&#xA;use [Stars_Call_Lists]&#xA;create table #CallListtemp5(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #CallListtemp5&#xA;&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_Call_Lists',&#xA;'[DTP_Texting_List]'  AS table_name,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_Call_Lists].[dbo].[DTP_Texting_List]&#xA; where year(Campaign_Date) &gt;= year(getdate())-1&#xA;-------------------------------------------------------&#xA;use [Stars_Call_Lists]&#xA;create table #CallListtemp6(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #CallListtemp6&#xA;&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_Call_Lists',&#xA;'[DTP_Call_Action_Items]'  AS table_name,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_Call_Lists].[dbo].[DTP_Call_Action_Items]&#xA;where dtp_Year &gt;= year(getdate())-1&#xA;-------------------------------------------------------&#xA;use [Stars_Evaluations]&#xA;create table #Evaluationstemp(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #Evaluationstemp&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_Evaluations',&#xA;'[ADH_StatusData]'  AS table_name,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_Evaluations].[dbo].[ADH_StatusData]&#xA;where year(EvaluationDate) &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;use [Stars_Evaluations]&#xA;create table #Evaluationstemp2(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #Evaluationstemp2&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_Evaluations',&#xA;'[ADH_StatusData_Today_Comb]'  AS table_name,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_Evaluations].[dbo].[ADH_StatusData_Today_Comb]   ------------------- this is a view, not a table  --------------------------------&#xA;where year(EvaluationDate) &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;use [Stars_Evaluations]&#xA;create table #Evaluationstemp3(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #Evaluationstemp3&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_Evaluations',&#xA;'[ClientOutput_MemberMeasure]'  AS table_name,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_Evaluations].[dbo].[ClientOutput_MemberMeasure]&#xA; where RunYear &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;use [Stars_Evaluations]&#xA;create table #Evaluationstemp4(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #Evaluationstemp4&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_Evaluations',&#xA;'[PClm_Star]'  AS table_name,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_Evaluations].[dbo].[PClm_Star]&#xA; where RunYear &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;use [Stars_Evaluations]&#xA;create table #Evaluationstemp5(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #Evaluationstemp5&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_Evaluations',&#xA;'[DTS_StatusData]'  AS table_name,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_Evaluations].[dbo].[DTS_StatusData]&#xA; where RunYear &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;use [Stars_Evaluations]&#xA;create table #Evaluationstemp6(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #Evaluationstemp6&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_Evaluations',&#xA;'[ProcessSet_DaysCovered]'  AS table_name,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_Evaluations].[dbo].[ProcessSet_DaysCovered]&#xA;where RunYear &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;use [Stars_Evaluations]&#xA;create table #Evaluationstemp7(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #Evaluationstemp7&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_Evaluations',&#xA;'[New_StarCardThresholds]'  AS table_name,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_Evaluations].[dbo].[New_StarCardThresholds]&#xA;  where ThresholdYear &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;use [Stars_Evaluations]&#xA;create table #Evaluationstemp8(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #Evaluationstemp8&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_Evaluations',&#xA;'[New_StarCardClientThresholdSets]'  AS table_name,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_Evaluations].[dbo].[New_StarCardClientThresholdSets]&#xA;&#xA;--------------------------------------------------------------&#xA;use [Stars_Evaluations]&#xA;create table #Evaluationstemp9(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #Evaluationstemp9&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_Evaluations',&#xA;'[Client_Contracts]'  AS table_name,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_Evaluations].[dbo].[Client_Contracts]&#xA;  where Contract_Year &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;--------------------------------------------------------------&#xA;use [Stars_rdsm]&#xA;create table #Rdsmtemp(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #Rdsmtemp&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;'[Stars_Patients]'  AS table_name,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_rdsm].[dbo].[Stars_Patients]&#xA; where EligibilityYear &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;use [Stars_rdsm]&#xA;create table #Rdsmtemp2(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #Rdsmtemp2&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;'[Stars_Patients_Detail]'  AS table_name,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_rdsm].[dbo].[Stars_Patients_Detail]&#xA;&#xA;--------------------------------------------------------------&#xA;use [Stars_rdsm]&#xA;create table #Rdsmtemp3(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #Rdsmtemp3&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;'[Stars_Providers]'  AS table_name,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_rdsm].[dbo].[Stars_Providers]&#xA;&#xA;--------------------------------------------------------------&#xA;use [Stars_rdsm]&#xA;create table #Rdsmtemp4(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #Rdsmtemp4&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;'[Stars_Providers_Detail]'  AS table_name,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_rdsm].[dbo].[Stars_Providers_Detail]&#xA;--------------------------------------------------------------&#xA;use [Stars_rdsm]&#xA;create table #Rdsmtemp5(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #Rdsmtemp5&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;'[Stars_Patients_Plan]'  AS table_name,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_rdsm].[dbo].[Stars_Patients_Plan]&#xA; where RunYear &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;use [Stars_rdsm]&#xA;create table #Rdsmtemp6(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #Rdsmtemp6&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;'[Stars_Patient_Outreach]'  AS table_name,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_rdsm].[dbo].[Stars_Patient_Outreach]&#xA;&#xA;--------------------------------------------------------------&#xA;use [Stars_rdsm]&#xA;create table #Rdsmtemp7(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #Rdsmtemp7&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;'[Stars_Patients_Plan_PBP]'  AS table_name,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_rdsm].[dbo].[Stars_Patients_Plan_PBP]&#xA;  where RunYear &gt;= year(getdate())-1&#xA;-------------------------------------------------------------------------------------&#xA;--------------------------------------------------------------&#xA;use [Stars_rdsm]&#xA;create table #Rdsmtemp8(servername varchar(10), databasename varchar(80), tablename sysname, reccount int)&#xA;&#xA;insert into #Rdsmtemp8&#xA;SELECT&#x9;&#xA;[Server]= '005',&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;'[UHC_Membership_Current]'  AS table_name,&#x9;count(*) as RowCounter &#xA;FROM [Stars_rdsm].[dbo].[UHC_Membership_Current]&#xA;  where RunYear &gt;= year(getdate())-1&#xA;&#xA;&#xA;&#x9;--select * from #Billingtemp&#xA;&#x9;--drop table #Billingtemp&#xA;&#xA;------------------------------------------------------&#xA;INSERT INTO [Utilities].DBO.SpecificTableRowCounter05&#xA;select * from #Acumentemp&#xA;UNION&#xA;select * from #StarsArchivetemp&#xA;UNION&#xA;select * from #StarsArchivetemp2&#xA;UNION&#xA;select * from #StarsBillingtemp&#xA;UNION&#xA;select * from #CallListtemp&#xA;UNION&#xA;select * from #CallListtemp2&#xA;UNION&#xA;select * from #CallListtemp3&#xA;UNION&#xA;select * from #CallListtemp4&#xA;UNION&#xA;select * from #CallListtemp5&#xA;UNION&#xA;select * from #CallListtemp6&#xA;UNION&#xA;select * from #Evaluationstemp&#xA;UNION&#xA;select * from #Evaluationstemp2&#xA;UNION&#xA;select * from #Evaluationstemp3&#xA;UNION&#xA;select * from #Evaluationstemp4&#xA;UNION&#xA;select * from #Evaluationstemp5&#xA;UNION&#xA;select * from #Evaluationstemp6&#xA;UNION&#xA;select * from #Evaluationstemp7&#xA;UNION&#xA;select * from #Evaluationstemp8&#xA;UNION&#xA;select * from #Evaluationstemp9&#xA;UNION&#xA;select * from #Rdsmtemp&#xA;UNION&#xA;select * from #Rdsmtemp2&#xA;UNION&#xA;select * from #Rdsmtemp3&#xA;UNION&#xA;select * from #Rdsmtemp4&#xA;UNION&#xA;select * from #Rdsmtemp5&#xA;UNION&#xA;select * from #Rdsmtemp6&#xA;UNION&#xA;select * from #Rdsmtemp7&#xA;UNION&#xA;select * from #Rdsmtemp8&#xA;GO&#xA;&#x9;-----------------------------------------&#xA;DROP table #Acumentemp&#xA;DROP table #StarsArchivetemp&#xA;DROP table #StarsArchivetemp2&#xA;DROP table #StarsBillingtemp&#xA;DROP table #CallListtemp&#xA;DROP table #CallListtemp2&#xA;DROP table #CallListtemp3&#xA;DROP table #CallListtemp4&#xA;DROP table #CallListtemp5&#xA;DROP table #CallListtemp6&#xA;DROP table #Evaluationstemp&#xA;DROP table #Evaluationstemp2&#xA;DROP table #Evaluationstemp3&#xA;DROP table #Evaluationstemp4&#xA;DROP table #Evaluationstemp5&#xA;DROP table #Evaluationstemp6&#xA;DROP table #Evaluationstemp7&#xA;DROP table #Evaluationstemp8&#xA;DROP table #Evaluationstemp9&#xA;DROP table #Rdsmtemp&#xA;DROP table #Rdsmtemp2&#xA;DROP table #Rdsmtemp3&#xA;DROP table #Rdsmtemp4&#xA;DROP table #Rdsmtemp5&#xA;DROP table #Rdsmtemp6&#xA;DROP table #Rdsmtemp7&#xA;DROP table #Rdsmtemp8"
+          SQLTask:ServerVersion="9"
+          SQLTask:ExtendedLogging="True"
+          SQLTask:LocalConnectionForLogging=""
+          SQLTask:TaskName=""
+          SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{88151A23-0C23-4A96-85ED-9C477B96CB0E}"
+      DTS:From="Package\Execute T-SQL Statement Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Execute T-SQL Statement Task 1" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="225,42"
+          Id="Package\Execute T-SQL Statement Task"
+          TopLeft="307.5,74.5" />
+        <NodeLayout
+          Size="234,42"
+          Id="Package\Execute T-SQL Statement Task 1"
+          TopLeft="319,212" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="420,116.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="16,95.5"
+              Start="0,0"
+              End="16,88">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,43.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,43.75"
+                    Point2="0,47.75"
+                    Point3="4,47.75" />
+                  <mssgle:LineSegment
+                    End="12,47.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="12,47.75"
+                    Point2="16,47.75"
+                    Point3="16,51.75" />
+                  <mssgle:LineSegment
+                    End="16,88" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
