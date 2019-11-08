@@ -1,0 +1,1094 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="10/30/2019 7:39:17 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="LT-94TZ1X2-0836"
+  DTS:CreatorName="PHARMMD\steven.sigmon"
+  DTS:DTSID="{BAA2F607-C4EB-4A70-B045-CEFBE4B5EA5B}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.1301.433"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="05ODSTableLoadCounter 1"
+  DTS:PackageType="5"
+  DTS:VersionBuild="105"
+  DTS:VersionGUID="{A4D78666-448B-4DA0-A07B-03C35B4610F4}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[003]"
+      DTS:CreationName="ADO.NET:SQL"
+      DTS:DTSID="{2ADA056B-B8E6-4B03-B766-C7F88EFE3BFA}"
+      DTS:ObjectName="003">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=p10prdsde003;Integrated Security=SSPI;Connect Timeout=30;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[05]"
+      DTS:CreationName="ADO.NET:SQL"
+      DTS:DTSID="{ABEFDF7A-CC11-4CEC-BB52-C8DC107EDD4B}"
+      DTS:ObjectName="05">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=P10PMW90PSDE05;Integrated Security=SSPI;Connect Timeout=30;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[P10PMW90PSDE05]"
+      DTS:CreationName="SMOServer"
+      DTS:DTSID="{86BF5107-D542-45DA-8559-519F8B95FF7E}"
+      DTS:ObjectName="P10PMW90PSDE05">
+      <DTS:ObjectData>
+        <SMOServerConnectionManager
+          ConnectionString="SqlServerName=P10PMW90PSDE05;UseWindowsAuthentication=True;UserName=;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[P10PMW90PSDE05.Utilities]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{6AE6A94B-88F1-45F0-9CB6-73879F14C058}"
+      DTS:ObjectName="P10PMW90PSDE05.Utilities">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=P10PMW90PSDE05;Initial Catalog=Utilities;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[p10prdsde002]"
+      DTS:CreationName="SMOServer"
+      DTS:DTSID="{315B4FF3-54DF-4145-96CF-13C45240BFDC}"
+      DTS:ObjectName="p10prdsde002">
+      <DTS:ObjectData>
+        <SMOServerConnectionManager
+          ConnectionString="SqlServerName=p10prdsde002;UseWindowsAuthentication=True;UserName=;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[p10prdsde003]"
+      DTS:CreationName="SMOServer"
+      DTS:DTSID="{7A79DD99-7BF4-4E2C-845E-48122E4702DD}"
+      DTS:ObjectName="p10prdsde003">
+      <DTS:ObjectData>
+        <SMOServerConnectionManager
+          ConnectionString="SqlServerName=p10prdsde003;UseWindowsAuthentication=True;UserName=;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[p10prdsde003.Utilities]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{31E3B48A-4251-4A05-A68F-60E7E870D7E6}"
+      DTS:ObjectName="p10prdsde003.Utilities">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=p10prdsde003;Initial Catalog=Utilities;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\03to05"
+      DTS:CreationName="Microsoft.TransferSqlServerObjectsTask"
+      DTS:Description="Transfer SQL Server Objects Task"
+      DTS:DTSID="{273F3966-BE5B-425B-9F8E-84A33ED0B807}"
+      DTS:ExecutableType="Microsoft.TransferSqlServerObjectsTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="03to05"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <TransferSqlServerObjectsTaskData
+          SourceConnection="{7A79DD99-7BF4-4E2C-845E-48122E4702DD}"
+          DestinationConnection="{86BF5107-D542-45DA-8559-519F8B95FF7E}"
+          SourceDatabase="Utilities"
+          DestinationDatabase="Utilities"
+          CopyAllTables="True"
+          TablesList="1,33,[dbo].[SpecificTableRowCounter03],"
+          DropObjectsFirst="True"
+          CopyData="True" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create 03 Counter Table"
+      DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+      DTS:Description="Execute T-SQL Statement Task"
+      DTS:DTSID="{2EB31988-C130-414A-BE7E-B0E44BD330A4}"
+      DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create 03 Counter Table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2ADA056B-B8E6-4B03-B766-C7F88EFE3BFA}"
+          SQLTask:SqlStatementSource="USE Utilities&#xA;go&#xA;SET ANSI_NULLS ON&#xA;GO&#xA;&#xA;SET QUOTED_IDENTIFIER ON&#xA;GO&#xA;&#xA;SET ANSI_PADDING ON&#xA;GO&#xA;&#xA;drop table [Utilities].[dbo].SpecificTableRowCounter03&#xA;&#xA;create table [dbo].SpecificTableRowCounter03(&#xA;[id] [bigint] IDENTITY(1,1) NOT FOR REPLICATION NOT NULL,&#xA;[ServerName] varchar(40) null,&#xA;[DatabaseName] varchar(80) not null,&#xA;[TableName] varchar(100) Not Null,&#xA;[TimeStamp] datetime not null,&#xA;[RowCounter] int not null&#xA;) On [PRIMARY]&#xA;;"
+          SQLTask:ServerVersion="9"
+          SQLTask:ExtendedLogging="True"
+          SQLTask:LocalConnectionForLogging=""
+          SQLTask:TaskName=""
+          SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Create 05 Counter Table"
+      DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+      DTS:Description="Execute T-SQL Statement Task"
+      DTS:DTSID="{A6BCC4D2-6C22-44A9-8103-0B6EBC8C8224}"
+      DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create 05 Counter Table"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{ABEFDF7A-CC11-4CEC-BB52-C8DC107EDD4B}"
+          SQLTask:SqlStatementSource="USE Utilities&#xA;go&#xA;SET ANSI_NULLS ON&#xA;GO&#xA;&#xA;SET QUOTED_IDENTIFIER ON&#xA;GO&#xA;&#xA;SET ANSI_PADDING ON&#xA;GO&#xA;&#xA;drop table [Utilities].[dbo].SpecificTableRowCounter05&#xA;&#xA;&#xA;create table [dbo].SpecificTableRowCounter05(&#xA;[id] [bigint] IDENTITY(1,1) NOT FOR REPLICATION NOT NULL,&#xA;[ServerName] varchar(1000) null,&#xA;[DatabaseName] varchar(100) not null,&#xA;[TableName] varchar(100) Not Null,&#xA;[TimeStamp] datetime not null,&#xA;[RowCounter] int not null&#xA;) On [PRIMARY]&#xA;;&#xA;&#xA;&#xA;&#xA;"
+          SQLTask:ServerVersion="9"
+          SQLTask:ExtendedLogging="True"
+          SQLTask:LocalConnectionForLogging=""
+          SQLTask:TaskName=""
+          SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Data Flow Task"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{95F464FF-2238-41B2-8144-2E2CA0502DB2}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Data Flow Task"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\Data Flow Task\OLE DB Destination"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="OLE DB Destination"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[RowCounts0305]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">0</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\OLE DB Destination.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[P10PMW90PSDE05.Utilities]"
+                  connectionManagerRefId="Package.ConnectionManagers[P10PMW90PSDE05.Utilities]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ODS_SeverName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="1000"
+                      cachedName="ODS_SeverName"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ODS_SeverName]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ODS_SeverName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ODS_DatabaseName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="ODS_DatabaseName"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ODS_DatabaseName]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ODS_DatabaseName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ODS_TableName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="ODS_TableName"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ODS_TableName]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ODS_TableName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OPS_ServerName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="40"
+                      cachedName="OPS_ServerName"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OPS_ServerName]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[OPS_ServerName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OPS_DatabaseName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="80"
+                      cachedName="OPS_DatabaseName"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OPS_DatabaseName]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[OPS_DatabaseName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OPS_TableName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="100"
+                      cachedName="OPS_TableName"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OPS_TableName]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[OPS_TableName]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ODS_TimeStamp]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="ODS_TimeStamp"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ODS_TimeStamp]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ODS_TimeStamp]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[ODS_RowCounter]"
+                      cachedDataType="i4"
+                      cachedName="ODS_RowCounter"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ODS_RowCounter]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ODS_RowCounter]" />
+                    <inputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[OPS_RowCounter]"
+                      cachedDataType="i4"
+                      cachedName="OPS_RowCounter"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OPS_RowCounter]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[OPS_RowCounter]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ODS_SeverName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="ODS_SeverName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ODS_DatabaseName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="ODS_DatabaseName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ODS_TableName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="ODS_TableName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OPS_ServerName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="OPS_ServerName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OPS_DatabaseName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="OPS_DatabaseName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OPS_TableName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="OPS_TableName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ODS_TimeStamp]"
+                      dataType="dbTimeStamp"
+                      name="ODS_TimeStamp" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ODS_RowCounter]"
+                      dataType="i4"
+                      name="ODS_RowCounter" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[OPS_RowCounter]"
+                      dataType="i4"
+                      name="OPS_RowCounter" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\Data Flow Task\OLE DB Source"
+              componentClassID="Microsoft.OLEDBSource"
+              contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7"
+              description="OLE DB Source"
+              name="OLE DB Source"
+              usesDispositions="true"
+              version="7">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset"></property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91">SELECT distinct
+       [ODS_SeverName]= a.[ServerName]
+	  , [ODS_DatabaseName]= a.[DatabaseName]
+      , [ODS_TableName]= a.[TableName]
+	  , [OPS_ServerName]= b.ServerName
+	  , [OPS_DatabaseName]= b.DatabaseName
+	  , [OPS_TableName]= b.TableName
+                    ,    [ODS_TimeStamp] = a.[timestamp]
+      , [ODS_RowCounter]= a.[RowCounter]
+	  , [OPS_RowCounter]= b.RowCounter
+  FROM [Utilities].[dbo].[SpecificTableRowCounter05] a
+left join [Utilities].[dbo].[SpecificTableRowCounter03] b
+	ON a.TableName = b.TableName
+	order by ODS_TableName</property>
+                <property
+                  dataType="System.String"
+                  description="The variable that contains the SQL command to be executed."
+                  name="SqlCommandVariable"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">2</property>
+                <property
+                  dataType="System.String"
+                  description="The mappings between the parameters in the SQL command and variables."
+                  name="ParameterMapping"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\Data Flow Task\OLE DB Source.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[P10PMW90PSDE05.Utilities]"
+                  connectionManagerRefId="Package.ConnectionManagers[P10PMW90PSDE05.Utilities]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]"
+                  name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ODS_SeverName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ODS_SeverName]"
+                      length="1000"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ODS_SeverName]"
+                      name="ODS_SeverName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ODS_DatabaseName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ODS_DatabaseName]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ODS_DatabaseName]"
+                      name="ODS_DatabaseName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ODS_TableName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ODS_TableName]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ODS_TableName]"
+                      name="ODS_TableName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[OPS_ServerName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OPS_ServerName]"
+                      length="40"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[OPS_ServerName]"
+                      name="OPS_ServerName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[OPS_DatabaseName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OPS_DatabaseName]"
+                      length="80"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[OPS_DatabaseName]"
+                      name="OPS_DatabaseName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[OPS_TableName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OPS_TableName]"
+                      length="100"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[OPS_TableName]"
+                      name="OPS_TableName"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ODS_TimeStamp]"
+                      dataType="dbTimeStamp"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ODS_TimeStamp]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ODS_TimeStamp]"
+                      name="ODS_TimeStamp"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ODS_RowCounter]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ODS_RowCounter]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[ODS_RowCounter]"
+                      name="ODS_RowCounter"
+                      truncationRowDisposition="FailComponent" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[OPS_RowCounter]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OPS_RowCounter]"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].Columns[OPS_RowCounter]"
+                      name="OPS_RowCounter"
+                      truncationRowDisposition="FailComponent" />
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ODS_SeverName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      name="ODS_SeverName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ODS_DatabaseName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="ODS_DatabaseName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ODS_TableName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="ODS_TableName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OPS_ServerName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      name="OPS_ServerName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OPS_DatabaseName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="80"
+                      name="OPS_DatabaseName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OPS_TableName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="OPS_TableName" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ODS_TimeStamp]"
+                      dataType="dbTimeStamp"
+                      name="ODS_TimeStamp" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[ODS_RowCounter]"
+                      dataType="i4"
+                      name="ODS_RowCounter" />
+                    <externalMetadataColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output].ExternalColumns[OPS_RowCounter]"
+                      dataType="i4"
+                      name="OPS_RowCounter" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output]"
+                  isErrorOut="true"
+                  name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ODS_SeverName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="1000"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ODS_SeverName]"
+                      name="ODS_SeverName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ODS_DatabaseName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ODS_DatabaseName]"
+                      name="ODS_DatabaseName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ODS_TableName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ODS_TableName]"
+                      name="ODS_TableName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OPS_ServerName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="40"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OPS_ServerName]"
+                      name="OPS_ServerName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OPS_DatabaseName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="80"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OPS_DatabaseName]"
+                      name="OPS_DatabaseName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OPS_TableName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OPS_TableName]"
+                      name="OPS_TableName" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ODS_TimeStamp]"
+                      dataType="dbTimeStamp"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ODS_TimeStamp]"
+                      name="ODS_TimeStamp" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ODS_RowCounter]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ODS_RowCounter]"
+                      name="ODS_RowCounter" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OPS_RowCounter]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[OPS_RowCounter]"
+                      name="OPS_RowCounter" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\Data Flow Task.Paths[OLE DB Source Output]"
+              endId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]"
+              name="OLE DB Source Output"
+              startId="Package\Data Flow Task\OLE DB Source.Outputs[OLE DB Source Output]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Execute T-SQL Statement Task"
+      DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+      DTS:Description="Execute T-SQL Statement Task"
+      DTS:DTSID="{A483ADF4-BC1E-43FD-BB6B-D5F31D4084BA}"
+      DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Execute T-SQL Statement Task"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{ABEFDF7A-CC11-4CEC-BB52-C8DC107EDD4B}"
+          SQLTask:SqlStatementSource="TRUNCATE TABLE [Utilities].[dbo].[RowCounts0305]"
+          SQLTask:ServerVersion="9"
+          SQLTask:ExtendedLogging="True"
+          SQLTask:LocalConnectionForLogging=""
+          SQLTask:TaskName=""
+          SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert 03 counts in temp tables"
+      DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+      DTS:Description="Execute T-SQL Statement Task"
+      DTS:DTSID="{42E9EBF8-15EB-4D4F-B25F-B497387AA011}"
+      DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert 03 counts in temp tables"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{2ADA056B-B8E6-4B03-B766-C7F88EFE3BFA}"
+          SQLTask:SqlStatementSource="use Acumen&#xA;create table #Acumentemp(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #Acumentemp&#xA;&#xA;    select &#xA;&#x9;&#x9;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Acumen',&#xA;&#x9;&#x9;'[Adherence_Bene_Denominator]'  AS table_name&#xA;&#x9;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter  &#xA;FROM&#x9;[Acumen].[dbo].[Adherence_Bene_Denominator]&#xA;where [Measure_Year] &gt;= year(getdate())-1&#xA;------------------------------------------------------&#xA;use [STARS_rdsm]&#xA;create table #Stars_rdsmtemp(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;insert into #Stars_rdsmtemp&#xA;&#xA;    select &#xA;&#x9;&#x9;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;&#x9;&#x9;'[Stars_Patient_Outreach]'  AS table_name&#xA;&#x9;&#x9;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter &#xA;FROM&#x9;[Stars_rdsm].[dbo].[Stars_Patient_Outreach]&#xA;&#xA;------------------------------------------------------&#xA;use Stars_rdsm&#xA;create table #Stars_rdsmtemp2(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;insert into #Stars_rdsmtemp2&#xA;&#xA;    select &#xA;&#x9;&#x9;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;&#x9;&#x9;'[Stars_Patients]'  AS table_name&#xA;&#x9;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter &#xA;FROM&#x9;[Stars_rdsm].[dbo].[Stars_Patients]&#xA; where EligibilityYear &gt;= year(getdate())-1&#xA;------------------------------------------------------&#xA;use Stars_rdsm&#xA;create table #Stars_rdsmtemp3(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;insert into #Stars_rdsmtemp3&#xA;&#xA;    select &#xA;&#x9;&#x9;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;&#x9;&#x9;'[Stars_Patients_Detail]'  AS table_name&#xA;&#x9;&#x9;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter  &#xA;FROM&#x9;[Stars_rdsm].[dbo].[Stars_Patients_Detail]&#xA;------------------------------------------------------&#xA;use Stars_rdsm&#xA;create table #Stars_rdsmtemp4(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;insert into #Stars_rdsmtemp4&#xA;&#xA;    select &#xA;&#x9;&#x9;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;&#x9;&#x9;'[Stars_Patients_Plan]'  AS table_name&#xA;&#x9;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter  &#xA;FROM&#x9;[Stars_rdsm].[dbo].[Stars_Patients_Plan]&#xA; where RunYear &gt;= year(getdate())-1&#xA;------------------------------------------------------&#xA;use Stars_rdsm&#xA;create table #Stars_rdsmtemp5(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;insert into #Stars_rdsmtemp5&#xA;&#xA;    select &#xA;&#x9;&#x9;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;&#x9;&#x9;'[Stars_Providers]'  AS table_name&#xA;&#x9;&#x9;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter &#xA;FROM&#x9;[Stars_rdsm].[dbo].[Stars_Providers]&#xA;------------------------------------------------------&#xA;use Stars_rdsm&#xA;create table #Stars_rdsmtemp6(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;insert into #Stars_rdsmtemp6&#xA;&#xA;    select &#xA;&#x9;&#x9;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;&#x9;&#x9;'[Stars_Providers_Detail]'  AS table_name&#xA;&#x9;&#x9;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter  &#xA;FROM&#x9;[Stars_rdsm].[dbo].[Stars_Providers_Detail]&#xA;&#xA;------------------------------------------------------&#xA;use Stars_rdsm&#xA;create table #Stars_rdsmtemp7(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;insert into #Stars_rdsmtemp7&#xA;&#xA;    select &#xA;&#x9;&#x9;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;&#x9;&#x9;'[Stars_Patients_Plan_PBP]'  AS table_name&#xA;&#x9;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter  &#xA;FROM&#x9;[Stars_rdsm].[dbo].[Stars_Patients_Plan_PBP]&#xA; where RunYear &gt;= year(getdate())-1&#xA;------------------------------------------------------&#xA;use Stars_rdsm&#xA;create table #Stars_rdsmtemp8(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;insert into #Stars_rdsmtemp8&#xA;&#xA;    select &#xA;&#x9;&#x9;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;&#x9;&#x9;'[Filewatch_History]'  AS table_name&#xA;&#x9;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter  &#xA;FROM&#x9;[Stars_rdsm].[dbo].[Filewatch_History]&#xA;------------------------------------------------------&#xA;use Stars_rdsm&#xA;create table #Stars_rdsmtemp9(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;insert into #Stars_rdsmtemp9&#xA;&#xA;    select &#xA;&#x9;&#x9;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;&#x9;&#x9;'[UHC_Inpatient_Census_Report]'  AS table_name&#xA;&#x9;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter  &#xA;FROM&#x9;[Stars_rdsm].[dbo].[UHC_Inpatient_Census_Report]&#xA;  where RunYear &gt;= year(getdate())-1&#xA;------------------------------------------------------&#xA;use Stars_rdsm&#xA;create table #Stars_rdsmtemp10(servername varchar(100), databasename varchar(80), tablename sysname,timestamp datetime, reccount int)&#xA;&#xA;insert into #Stars_rdsmtemp10&#xA;&#xA;    select &#xA;&#x9;&#x9;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;&#x9;&#x9;'[UHC_Membership_Current]'  AS table_name&#xA;&#x9;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter  &#xA;FROM&#x9;[Stars_rdsm].[dbo].[UHC_Membership_Current]&#xA;------------------------------------------------------&#xA;&#xA;&#xA;&#xA;----------use Archive&#xA;----------create table #Archivetemp(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;----------insert into #Archivetemp&#xA;&#xA;----------    select &#xA;----------&#x9;&#x9;[Server]= @@servername,&#xA;----------&#x9;&#x9;[Database]= 'Archive',&#xA;----------&#x9;&#x9;'[UHC_Membership]'  AS table_name,&#x9;count(*) as RowCounter &#xA;----------FROM&#x9;[Archive].[dbo].[UHC_Membership]&#xA;---------------------------------------------------------------------------&#xA;----------use Archive&#xA;----------create table #Archivetemp2(servername varchar(100), databasename varchar(80), tablename sysname,timestamp datetime, reccount int)&#xA;&#xA;----------insert into #Archivetemp2&#xA;----------SELECT&#x9;&#xA;----------[Server]= @@servername,&#xA;----------&#x9;&#x9;[Database]= 'Archive',&#xA;----------'[UHC_Inpatient_Census_Report]'  AS table_name,&#x9;count(*) as RowCounter &#xA;----------from&#x9;Archive.[dbo].[UHC_Inpatient_Census_Report]&#xA;&#xA;-------------------------------------------------------------------------&#xA;----------use Archive&#xA;----------create table #Archivetemp3(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;----------insert into #Archivetemp3&#xA;&#xA;----------SELECT&#x9;&#xA;----------[Server]= @@servername,&#xA;----------&#x9;&#x9;[Database]= 'Stars_Archive',&#xA;----------&#x9;&#x9;'[ADH_StatusData]'  AS table_name,&#x9;count(*) as RowCounter &#xA;----------from&#x9;Archive.[dbo].[ADH_StatusData]&#xA;-----------------------------------------------------------------------------------&#xA;----------use Archive&#xA;----------create table #Archivetemp4(servername varchar(100), databasename varchar(80), tablename sysname,timestamp datetime, reccount int)&#xA;&#xA;----------insert into #Archivetemp4&#xA;&#xA;----------SELECT&#x9;&#xA;----------[Server]= @@servername,&#xA;----------&#x9;&#x9;[Database]= 'Stars_Archive',&#xA;----------&#x9;&#x9;'[DTS_StatusData]'  AS table_name,&#x9;count(*) as RowCounter &#xA;----------from&#x9;Archive.[dbo].[DTS_StatusData]&#xA;&#xA;-----------------------------------------------&#xA;&#xA;use [Stars_Billing]&#xA;create table #StarsBillingtemp(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;insert into #StarsBillingtemp&#xA;&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Billing',&#xA;'[Billing]'  AS table_name&#xA;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter  &#xA;FROM&#x9;[Stars_Billing].[dbo].[Billing]&#xA; where Billing_Year &gt;= year(getdate())-1&#xA;-------------------------------------------------------&#xA;use [Stars_Call_Lists]&#xA;create table #CallListtemp(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;insert into #CallListtemp&#xA;&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Call_Lists',&#xA;&#x9;&#x9;'[DTP_CNSLD_Call_List]'  AS table_name&#xA;&#x9;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter  &#xA;FROM&#x9;[Stars_Call_Lists].[dbo].[DTP_CNSLD_Call_List]&#xA;  where year(Campaign_Date) &gt;= year(getdate())-1&#xA;-------------------------------------------------------&#xA;use [Stars_Call_Lists]&#xA;create table #CallListtemp2(servername varchar(100), databasename varchar(80), tablename sysname,timestamp datetime, reccount int)&#xA;&#xA;insert into #CallListtemp2&#xA;&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Call_Lists',&#xA;'[DTP_CNSLD_Fax_List]'  AS table_name&#xA;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter &#xA;from&#x9;[Stars_Call_Lists].[dbo].[DTP_CNSLD_Fax_List]&#xA;where year(Campaign_Date) &gt;= year(getdate())-1&#xA;-------------------------------------------------------&#xA;use [Stars_Call_Lists]&#xA;create table #CallListtemp3(servername varchar(100), databasename varchar(80), tablename sysname,timestamp datetime, reccount int)&#xA;&#xA;insert into #CallListtemp3&#xA;&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Call_Lists',&#xA;'[DTP_Fax_List]'  AS table_name&#xA;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter  &#xA;from&#x9;[Stars_Call_Lists].[dbo].[DTP_Fax_List]&#xA;  where year(Campaign_Date) &gt;= year(getdate())-1&#xA;-------------------------------------------------------&#xA;use [Stars_Call_Lists]&#xA;create table #CallListtemp4(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;insert into #CallListtemp4&#xA;&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Call_Lists',&#xA;'[DTP_StarConnect_Call_List]'  AS table_name&#xA;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter &#xA;from&#x9;[Stars_Call_Lists].[dbo].[DTP_StarConnect_Call_List]&#xA;  where dtp_Year &gt;= year(getdate())-1&#xA;-------------------------------------------------------&#xA;use [Stars_Call_Lists]&#xA;create table #CallListtemp5(servername varchar(100), databasename varchar(80), tablename sysname,timestamp datetime, reccount int)&#xA;&#xA;insert into #CallListtemp5&#xA;&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Call_Lists',&#xA;'[DTP_Texting_List]'  AS table_name&#xA;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter  &#xA;from&#x9;[Stars_Call_Lists].[dbo].[DTP_Texting_List]&#xA; where year(Campaign_Date) &gt;= year(getdate())-1&#xA;&#xA;-------------------------------------------------------&#xA;use [Stars_Call_Lists]&#xA;create table #CallListtemp6(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;insert into #CallListtemp6&#xA;&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Call_Lists',&#xA;'[DTP_Call_Action_Items]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter  &#xA;from&#x9;[Stars_Call_Lists].[dbo].[DTP_Call_Action_Items]&#xA;where dtp_Year &gt;= year(getdate())-1&#xA;-------------------------------------------------------&#xA;use [Stars_Warehouse]&#xA;create table #WHtemp(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;insert into #WHtemp&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Warehouse',&#xA;'[ADH_StatusData]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter &#xA;from&#x9;[Stars_Warehouse].[dbo].[ADH_StatusData]&#xA;where year(EvaluationDate) &gt;= year(getdate())-1&#xA;&#xA;--------------------------------------------------------------&#xA;use [Stars_Warehouse]&#xA;create table #WHtemp2(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;insert into #WHtemp2&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Warehouse',&#xA;'[ADH_StatusData_Today_Comb]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter  &#xA;from&#x9;[Stars_Warehouse].[dbo].[ADH_StatusData_Today_Comb]&#xA;where year(EvaluationDate) &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;use [Stars_Warehouse]&#xA;create table #WHtemp3(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;insert into #WHtemp3&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Warehouse',&#xA;'[ClientOutput_MemberMeasure]'  AS table_name&#xA;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter &#xA;from&#x9;[Stars_Warehouse].[dbo].[ClientOutput_MemberMeasure]&#xA;where RunYear &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;use [Stars_Warehouse]&#xA;create table #WHtemp4(servername varchar(100), databasename varchar(80), tablename sysname,timestamp datetime, reccount int)&#xA;&#xA;insert into #WHtemp4&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Warehouse',&#xA;'[PClm_Star_ADH_Claims]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter  &#xA;from&#x9;[Stars_Warehouse].[dbo].[PClm_Star_ADH_Claims]&#xA;where RunYear &gt;= year(getdate())-1&#xA;&#xA;&#xA;--------------------------------------------------------------&#xA;&#xA;use [Stars_Warehouse]&#xA;create table #WHtemp5(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;insert into #WHtemp5&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Warehouse',&#xA;'[New_StarCardThresholds]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter  &#xA;from&#x9;[Stars_Warehouse].[dbo].[New_StarCardThresholds]&#xA;where ThresholdYear &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;&#xA;use [Stars_Warehouse]&#xA;create table #WHtemp6(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;insert into #WHtemp6&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Evaluations',&#xA;'[New_StarCardClientThresholdSets]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter &#xA;from&#x9;[Stars_Warehouse].[dbo].[New_StarCardClientThresholdSets]&#xA;  where ThresholdYear &gt;= year(getdate())-1&#xA;-------------------------------------------------------------&#xA;&#xA;use [Stars_Warehouse]&#xA;create table #WHtemp7(servername varchar(100), databasename varchar(80), tablename sysname,timestamp datetime,reccount int)&#xA;&#xA;insert into #WHtemp7&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Evaluations',&#xA;'[DTS_StatusData]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter &#xA;from&#x9;[Stars_Warehouse].[dbo].[DTS_StatusData]&#xA;  where RunYear &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;&#xA;&#xA;use [Stars_Warehouse]&#xA;create table #WHtemp9 (servername varchar(100), databasename varchar(80), tablename sysname,timestamp datetime, reccount int)&#xA;&#xA;insert into #WHtemp9&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Warehouse',&#xA;'[ProcessSet_DaysCovered]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter  &#xA;from&#x9;[Stars_Warehouse].[dbo].[ProcessSet_DaysCovered]&#xA;  where RunYear &gt;= year(getdate())-1&#xA;----------------------------------------------------------------------------&#xA;use [Stars_Warehouse]&#xA;create table #WHtemp10(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;insert into #WHtemp10&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Warehouse',&#xA;'[DTS_Status_Data]'  AS table_name&#xA;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter  &#xA;from&#x9;Stars_Warehouse.[dbo].[DTS_StatusData]&#xA; where RunYear &gt;= year(getdate())-1&#xA;&#xA;---------------------------------------------------------------------------------------------------------&#xA;use [Stars]&#xA;create table #Starstemp(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;insert into #Starstemp&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars',&#xA;'[Client_Contracts]'  AS table_name&#xA;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter  &#xA;from&#x9;Stars.[dbo].[Client_Contracts]&#xA; where Contract_Year &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;use [Stars]&#xA;create table #Starstemp2(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;insert into #Starstemp2&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars',&#xA;'[Stars_RunData]'  AS table_name&#xA;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter  &#xA;from&#x9;[Stars].[dbo].[Stars_RunData]&#xA; where RunYear &gt;= year(getdate())-1&#xA; --------------------------------------------------------------------------------------------&#xA; &#xA;use [Stars]&#xA;create table #Starstemp3(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime,reccount int)&#xA;&#xA;insert into #Starstemp3&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars',&#xA;'[PClm_Star]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,count(*) as RowCounter &#xA;from&#x9;[Stars].[dbo].[PClm_Star]&#xA; where RunYear &gt;= year(getdate())-1&#xA;&#xA;------------------------------------------------------&#xA;INSERT INTO [Utilities].[dbo].[SpecificTableRowCounter03]&#xA;&#xA;select * from #Acumentemp&#xA;UNION&#xA;select * from #Stars_rdsmtemp&#xA;UNION&#xA;select * from #Stars_rdsmtemp2&#xA;UNION&#xA;select * from #Stars_rdsmtemp3&#xA;UNION&#xA;select * from #Stars_rdsmtemp4&#xA;UNION&#xA;select * from #Stars_rdsmtemp5&#xA;UNION&#xA;select * from #Stars_rdsmtemp6&#xA;UNION&#xA;select * from #Stars_rdsmtemp7&#xA;UNION&#xA;select * from #Stars_rdsmtemp8&#xA;UNION&#xA;select * from #Stars_rdsmtemp9&#xA;UNION&#xA;select * from #Stars_rdsmtemp10&#xA;UNION&#xA;select * from #StarsBillingtemp&#xA;UNION&#xA;select * from #CallListtemp&#xA;UNION&#xA;select * from #CallListtemp2&#xA;UNION&#xA;select * from #CallListtemp3&#xA;UNION&#xA;select * from #CallListtemp4&#xA;UNION&#xA;select * from #CallListtemp5&#xA;UNION&#xA;select * from #CallListtemp6&#xA;UNION&#xA;select * from #WHtemp&#xA;UNION&#xA;select * from #WHtemp2&#xA;UNION&#xA;select * from #WHtemp3&#xA;UNION&#xA;select * from #WHtemp4&#xA;UNION&#xA;select * from #WHtemp5&#xA;UNION&#xA;select * from #WHtemp6&#xA;UNION&#xA;select * from #WHtemp7&#xA;UNION&#xA;select * from #WHtemp9&#xA;UNION&#xA;select * from #WHtemp10&#xA;UNION&#xA;select * from #Starstemp&#xA;UNION&#xA;select * from #Starstemp2&#xA;UNION&#xA;select * from #Starstemp3&#xA;;&#xA;&#x9;-----------------------------------------&#xA;&#xA;drop  table #Acumentemp&#xA; drop  table #Stars_rdsmtemp&#xA; drop  table #Stars_rdsmtemp2&#xA; drop  table #Stars_rdsmtemp3&#xA; drop  table #Stars_rdsmtemp4&#xA; drop  table #Stars_rdsmtemp5&#xA; drop  table #Stars_rdsmtemp6&#xA; drop  table #Stars_rdsmtemp7&#xA; drop  table #Stars_rdsmtemp8&#xA; drop  table #Stars_rdsmtemp9&#xA; drop  table #Stars_rdsmtemp10&#xA; drop  table #StarsBillingtemp&#xA; drop  table #CallListtemp&#xA; drop  table #CallListtemp2&#xA; drop  table #CallListtemp3&#xA; drop  table #CallListtemp4&#xA; drop  table #CallListtemp5&#xA; drop  table #CallListtemp6&#xA; drop  table #WHtemp&#xA; drop  table #WHtemp2&#xA; drop  table #WHtemp3&#xA; drop  table #WHtemp4&#xA; drop  table #WHtemp5&#xA; drop  table #WHtemp6&#xA; drop  table #WHtemp7&#xA; drop  table #WHtemp9&#xA; drop  table #WHtemp10&#xA; drop  table #Starstemp&#xA; drop  table #Starstemp2&#xA; drop  table #Starstemp3&#xA;;"
+          SQLTask:ServerVersion="9"
+          SQLTask:ExtendedLogging="True"
+          SQLTask:LocalConnectionForLogging=""
+          SQLTask:TaskName=""
+          SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Insert 05 counts in temp tables"
+      DTS:CreationName="Microsoft.DbMaintenanceTSQLExecuteTask"
+      DTS:Description="Execute T-SQL Statement Task"
+      DTS:DTSID="{CCB42EDE-F27F-43FC-B866-2E26FF72416A}"
+      DTS:ExecutableType="Microsoft.DbMaintenanceTSQLExecuteTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Insert 05 counts in temp tables"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <SQLTask:SqlTaskData
+          SQLTask:Connection="{ABEFDF7A-CC11-4CEC-BB52-C8DC107EDD4B}"
+          SQLTask:SqlStatementSource="use Acumen&#xA;create table #Acumentemp(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #Acumentemp&#xA;&#xA;    select &#xA;&#x9;&#x9;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Acumen',&#xA;&#x9;&#x9;'[Adherence_Bene_Denominator]'  AS table_name&#xA;&#x9;&#x9;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter  &#xA;FROM&#x9;[Acumen].[dbo].[Adherence_Bene_Denominator]&#xA;where [Measure_Year] &gt;= year(getdate())-1&#xA;&#xA;------------------------------------------------------&#xA;------use Stars_Archive&#xA;------create table #StarsArchivetemp(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;------insert into #StarsArchivetemp&#xA;&#xA;------    select &#xA;------&#x9;&#x9;[Server]= @@servername,&#xA;------&#x9;&#x9;[Database]= 'Stars_Archive',&#xA;------&#x9;&#x9;'[UHC_Membership]'  AS table_name,&#x9;count(*) as RowCounter &#xA;------FROM&#x9;[Stars_Archive].[dbo].[UHC_Membership]&#xA;------  where RunYear &gt;= year(getdate())-1&#xA;-----------------------------------------------------------------&#xA;use Stars_Archive&#xA;create table #StarsArchivetemp(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #StarsArchivetemp&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Archive',&#xA;'[UHC_Inpatient_Census_Report]'  AS table_name&#x9;&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter &#xA;from&#x9;Stars_Archive.[dbo].[UHC_Inpatient_Census_Report]&#xA;  where RunYear &gt;= year(getdate())-1&#xA;&#xA;&#xA;-----------------------------------------------&#xA;&#xA;use [Stars_Billing]&#xA;create table #StarsBillingtemp(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #StarsBillingtemp&#xA;&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Billing',&#xA;'[Billing]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter  &#xA;FROM&#x9;[Stars_Billing].[dbo].[Billing]&#xA;  where Billing_Year &gt;= year(getdate())-1&#xA;-------------------------------------------------------&#xA;use [Stars_Call_Lists]&#xA;create table #CallListtemp(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #CallListtemp&#xA;&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Call_Lists',&#xA;&#x9;&#x9;'[DTP_CNSLD_Call_List]'  AS table_name&#xA;&#x9;&#x9;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter &#xA;FROM&#x9;[Stars_Call_Lists].[dbo].[DTP_CNSLD_Call_List]&#xA;  where year(Campaign_Date) &gt;= year(getdate())-1&#xA;-------------------------------------------------------&#xA;use [Stars_Call_Lists]&#xA;create table #CallListtemp2(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #CallListtemp2&#xA;&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Call_Lists',&#xA;'[DTP_CNSLD_Fax_List]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_Call_Lists].[dbo].[DTP_CNSLD_Fax_List]&#xA; where year(Campaign_Date) &gt;= year(getdate())-1&#xA; &#xA;-------------------------------------------------------&#xA;use [Stars_Call_Lists]&#xA;create table #CallListtemp3(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #CallListtemp3&#xA;&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Call_Lists',&#xA;'[DTP_Fax_List]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_Call_Lists].[dbo].[DTP_Fax_List]&#xA;  where year(Campaign_Date) &gt;= year(getdate())-1&#xA;-------------------------------------------------------&#xA;use [Stars_Call_Lists]&#xA;create table #CallListtemp4(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #CallListtemp4&#xA;&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Call_Lists',&#xA;'[DTP_StarConnect_Call_List]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_Call_Lists].[dbo].[DTP_StarConnect_Call_List]&#xA;  where dtp_Year &gt;= year(getdate())-1&#xA;-------------------------------------------------------&#xA;use [Stars_Call_Lists]&#xA;create table #CallListtemp5(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #CallListtemp5&#xA;&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Call_Lists',&#xA;'[DTP_Texting_List]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter  &#xA;from&#x9;[Stars_Call_Lists].[dbo].[DTP_Texting_List]&#xA; where year(Campaign_Date) &gt;= year(getdate())-1&#xA;-------------------------------------------------------&#xA;use [Stars_Call_Lists]&#xA;create table #CallListtemp6(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #CallListtemp6&#xA;&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Call_Lists',&#xA;'[DTP_Call_Action_Items]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_Call_Lists].[dbo].[DTP_Call_Action_Items]&#xA;where dtp_Year &gt;= year(getdate())-1&#xA;-------------------------------------------------------&#xA;use [Stars_Evaluations]&#xA;create table #Evaluationstemp(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #Evaluationstemp&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Evaluations',&#xA;'[ADH_StatusData]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter  &#xA;from&#x9;[Stars_Evaluations].[dbo].[ADH_StatusData]&#xA;where year(EvaluationDate) &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;use [Stars_Evaluations]&#xA;create table #Evaluationstemp2(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;insert into #Evaluationstemp2&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Evaluations',&#xA;'[ADH_StatusData_Today_Comb]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_Evaluations].[dbo].[ADH_StatusData_Today_Comb]   ------------------- this is a view, not a table  --------------------------------&#xA;where year(EvaluationDate) &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;use [Stars_Evaluations]&#xA;create table #Evaluationstemp3(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #Evaluationstemp3&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Evaluations',&#xA;'[ClientOutput_MemberMeasure]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter  &#xA;from&#x9;[Stars_Evaluations].[dbo].[ClientOutput_MemberMeasure]&#xA; where RunYear &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;use [Stars_Evaluations]&#xA;create table #Evaluationstemp4(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #Evaluationstemp4&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Evaluations',&#xA;'[PClm_Star]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter  &#xA;from&#x9;[Stars_Evaluations].[dbo].[PClm_Star]&#xA; where RunYear &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;use [Stars_Evaluations]&#xA;create table #Evaluationstemp5(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #Evaluationstemp5&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Evaluations',&#xA;'[DTS_StatusData]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter  &#xA;from&#x9;[Stars_Evaluations].[dbo].[DTS_StatusData]&#xA; where RunYear &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;use [Stars_Evaluations]&#xA;create table #Evaluationstemp6(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #Evaluationstemp6&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Evaluations',&#xA;'[ProcessSet_DaysCovered]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_Evaluations].[dbo].[ProcessSet_DaysCovered]&#xA;where RunYear &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;use [Stars_Evaluations]&#xA;create table #Evaluationstemp7(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #Evaluationstemp7&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Evaluations',&#xA;'[New_StarCardThresholds]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter  &#xA;from&#x9;[Stars_Evaluations].[dbo].[New_StarCardThresholds]&#xA;  where ThresholdYear &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;use [Stars_Evaluations]&#xA;create table #Evaluationstemp8(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #Evaluationstemp8&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Evaluations',&#xA;'[New_StarCardClientThresholdSets]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter  &#xA;from&#x9;[Stars_Evaluations].[dbo].[New_StarCardClientThresholdSets]&#xA;&#xA;--------------------------------------------------------------&#xA;use [Stars_Evaluations]&#xA;create table #Evaluationstemp9(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #Evaluationstemp9&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_Evaluations',&#xA;'[Client_Contracts]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_Evaluations].[dbo].[Client_Contracts]&#xA;  where Contract_Year &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;--------------------------------------------------------------&#xA;use [Stars_rdsm]&#xA;create table #Rdsmtemp(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #Rdsmtemp&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;'[Stars_Patients]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter  &#xA;from&#x9;[Stars_rdsm].[dbo].[Stars_Patients]&#xA; where EligibilityYear &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;use [Stars_rdsm]&#xA;create table #Rdsmtemp2(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #Rdsmtemp2&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;'[Stars_Patients_Detail]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_rdsm].[dbo].[Stars_Patients_Detail]&#xA;&#xA;--------------------------------------------------------------&#xA;use [Stars_rdsm]&#xA;create table #Rdsmtemp3(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #Rdsmtemp3&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;'[Stars_Providers]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter  &#xA;from&#x9;[Stars_rdsm].[dbo].[Stars_Providers]&#xA;&#xA;--------------------------------------------------------------&#xA;use [Stars_rdsm]&#xA;create table #Rdsmtemp4(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #Rdsmtemp4&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;'[Stars_Providers_Detail]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_rdsm].[dbo].[Stars_Providers_Detail]&#xA;--------------------------------------------------------------&#xA;use [Stars_rdsm]&#xA;create table #Rdsmtemp5(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #Rdsmtemp5&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;'[Stars_Patients_Plan]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_rdsm].[dbo].[Stars_Patients_Plan]&#xA; where RunYear &gt;= year(getdate())-1&#xA;--------------------------------------------------------------&#xA;use [Stars_rdsm]&#xA;create table #Rdsmtemp6(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #Rdsmtemp6&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;'[Stars_Patient_Outreach]'  AS table_name&#xA; &#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter &#xA;&#x9;&#x9;from&#x9;[Stars_rdsm].[dbo].[Stars_Patient_Outreach]&#xA;&#xA;--------------------------------------------------------------&#xA;use [Stars_rdsm]&#xA;create table #Rdsmtemp7(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #Rdsmtemp7&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;'[Stars_Patients_Plan_PBP]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter &#xA;from&#x9;[Stars_rdsm].[dbo].[Stars_Patients_Plan_PBP]&#xA;  where RunYear &gt;= year(getdate())-1&#xA;-------------------------------------------------------------------------------------&#xA;--------------------------------------------------------------&#xA;use [Stars_rdsm]&#xA;create table #Rdsmtemp8(servername varchar(100), databasename varchar(80), tablename sysname, timestamp datetime, reccount int)&#xA;&#xA;insert into #Rdsmtemp8&#xA;SELECT&#x9;&#xA;[Server]= @@servername,&#xA;&#x9;&#x9;[Database]= 'Stars_rdsm',&#xA;'[UHC_Membership_Current]'  AS table_name&#xA;&#x9;, [TimeStamp]= getdate() &#xA;&#x9;&#x9;,&#x9;count(*) as RowCounter  &#xA;FROM [Stars_rdsm].[dbo].[UHC_Membership_Current]&#xA;  where RunYear &gt;= year(getdate())-1&#xA;&#xA;&#xA;------------------------------------------------------&#xA;INSERT INTO [Utilities].DBO.SpecificTableRowCounter05&#xA;select * from #Acumentemp&#xA;UNION&#xA;select * from #StarsArchivetemp&#xA;UNION&#xA;select * from #StarsBillingtemp&#xA;UNION&#xA;select * from #CallListtemp&#xA;UNION&#xA;select * from #CallListtemp2&#xA;UNION&#xA;select * from #CallListtemp3&#xA;UNION&#xA;select * from #CallListtemp4&#xA;UNION&#xA;select * from #CallListtemp5&#xA;UNION&#xA;select * from #CallListtemp6&#xA;UNION&#xA;select * from #Evaluationstemp&#xA;UNION&#xA;select * from #Evaluationstemp2&#xA;UNION&#xA;select * from #Evaluationstemp3&#xA;UNION&#xA;select * from #Evaluationstemp4&#xA;UNION&#xA;select * from #Evaluationstemp5&#xA;UNION&#xA;select * from #Evaluationstemp6&#xA;UNION&#xA;select * from #Evaluationstemp7&#xA;UNION&#xA;select * from #Evaluationstemp8&#xA;UNION&#xA;select * from #Evaluationstemp9&#xA;UNION&#xA;select * from #Rdsmtemp&#xA;UNION&#xA;select * from #Rdsmtemp2&#xA;UNION&#xA;select * from #Rdsmtemp3&#xA;UNION&#xA;select * from #Rdsmtemp4&#xA;UNION&#xA;select * from #Rdsmtemp5&#xA;UNION&#xA;select * from #Rdsmtemp6&#xA;UNION&#xA;select * from #Rdsmtemp7&#xA;UNION&#xA;select * from #Rdsmtemp8&#xA;GO&#xA;&#x9;-----------------------------------------&#xA;DROP table #Acumentemp&#xA;DROP table #StarsArchivetemp&#xA;DROP table #StarsBillingtemp&#xA;DROP table #CallListtemp&#xA;DROP table #CallListtemp2&#xA;DROP table #CallListtemp3&#xA;DROP table #CallListtemp4&#xA;DROP table #CallListtemp5&#xA;DROP table #CallListtemp6&#xA;DROP table #Evaluationstemp&#xA;DROP table #Evaluationstemp2&#xA;DROP table #Evaluationstemp3&#xA;DROP table #Evaluationstemp4&#xA;DROP table #Evaluationstemp5&#xA;DROP table #Evaluationstemp6&#xA;DROP table #Evaluationstemp7&#xA;DROP table #Evaluationstemp8&#xA;DROP table #Evaluationstemp9&#xA;DROP table #Rdsmtemp&#xA;DROP table #Rdsmtemp2&#xA;DROP table #Rdsmtemp3&#xA;DROP table #Rdsmtemp4&#xA;DROP table #Rdsmtemp5&#xA;DROP table #Rdsmtemp6&#xA;DROP table #Rdsmtemp7&#xA;DROP table #Rdsmtemp8"
+          SQLTask:ServerVersion="9"
+          SQLTask:ExtendedLogging="True"
+          SQLTask:LocalConnectionForLogging=""
+          SQLTask:TaskName=""
+          SQLTask:IgnoreDatabasesInNotOnlineState="False" xmlns:SQLTask="www.microsoft.com/sqlserver/dts/tasks/sqltask" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{EFC6974F-EF76-498D-94DC-E3166353409A}"
+      DTS:From="Package\Create 05 Counter Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Insert 05 counts in temp tables" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{669E6A3A-8B69-4E66-9EDB-FDC82435E4DD}"
+      DTS:From="Package\Insert 05 counts in temp tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Create 03 Counter Table" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{63BEA7D6-B17A-4DB2-BD68-9DA02E359010}"
+      DTS:From="Package\Create 03 Counter Table"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Insert 03 counts in temp tables" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 3]"
+      DTS:CreationName=""
+      DTS:DTSID="{DDCBA325-592D-4EBD-9EB2-76B02D0CE09A}"
+      DTS:From="Package\Insert 03 counts in temp tables"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 3"
+      DTS:To="Package\03to05" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 4]"
+      DTS:CreationName=""
+      DTS:DTSID="{C81C8344-B99C-4ECB-B532-DE04FA46AB9F}"
+      DTS:From="Package\03to05"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 4"
+      DTS:To="Package\Data Flow Task" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 5]"
+      DTS:CreationName=""
+      DTS:DTSID="{4A54FAA3-5E37-483B-A3B7-734758B9B21A}"
+      DTS:From="Package\Execute T-SQL Statement Task"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 5"
+      DTS:To="Package\Create 05 Counter Table" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="112,42"
+          Id="Package\03to05"
+          TopLeft="475,416" />
+        <NodeLayout
+          Size="194,42"
+          Id="Package\Create 03 Counter Table"
+          TopLeft="420,242" />
+        <NodeLayout
+          Size="194,42"
+          Id="Package\Create 05 Counter Table"
+          TopLeft="421.5,88.5" />
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Data Flow Task"
+          TopLeft="449,503" />
+        <NodeLayout
+          Size="225,42"
+          Id="Package\Execute T-SQL Statement Task"
+          TopLeft="388,6" />
+        <NodeLayout
+          Size="226,42"
+          Id="Package\Insert 03 counts in temp tables"
+          TopLeft="395,320" />
+        <NodeLayout
+          Size="226,42"
+          Id="Package\Insert 05 counts in temp tables"
+          TopLeft="411,159" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="521.25,130.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.5"
+              Start="0,0"
+              End="0,21">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="520.5,201">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,41"
+              Start="0,0"
+              End="0,33.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,33.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="517,284">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-9,36"
+              Start="0,0"
+              End="-9,28.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,14" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,14"
+                    Point2="0,18"
+                    Point3="-4,18" />
+                  <mssgle:LineSegment
+                    End="-5,18" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-5,18"
+                    Point2="-9,18"
+                    Point3="-9,22" />
+                  <mssgle:LineSegment
+                    End="-9,28.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 3]"
+          TopLeft="508,362">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="23,54"
+              Start="0,0"
+              End="23,46.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,23" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,23"
+                    Point2="0,27"
+                    Point3="4,27" />
+                  <mssgle:LineSegment
+                    End="19,27" />
+                  <mssgle:CubicBezierSegment
+                    Point1="19,27"
+                    Point2="23,27"
+                    Point3="23,31" />
+                  <mssgle:LineSegment
+                    End="23,46.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 4]"
+          TopLeft="527.75,458">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,45"
+              Start="0,0"
+              End="0,37.5">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,37.5" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 5]"
+          TopLeft="500.5,48">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="18,40.5"
+              Start="0,0"
+              End="18,33">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,16.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,16.25"
+                    Point2="0,20.25"
+                    Point3="4,20.25" />
+                  <mssgle:LineSegment
+                    End="14,20.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="14,20.25"
+                    Point2="18,20.25"
+                    Point3="18,24.25" />
+                  <mssgle:LineSegment
+                    End="18,33" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\Data Flow Task">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="150,42"
+          Id="Package\Data Flow Task\OLE DB Source"
+          TopLeft="360.5,19.5" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Data Flow Task\OLE DB Destination"
+          TopLeft="414,196" />
+        <EdgeLayout
+          Id="Package\Data Flow Task.Paths[OLE DB Source Output]"
+          TopLeft="435.5,61.5">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="64,134.5"
+              Start="0,0"
+              End="64,127">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,63.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,63.25"
+                    Point2="0,67.25"
+                    Point3="4,67.25" />
+                  <mssgle:LineSegment
+                    End="60,67.25" />
+                  <mssgle:CubicBezierSegment
+                    Point1="60,67.25"
+                    Point2="64,67.25"
+                    Point3="64,71.25" />
+                  <mssgle:LineSegment
+                    End="64,127" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLE DB Destination">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\Data Flow Task\OLE DB Source">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
