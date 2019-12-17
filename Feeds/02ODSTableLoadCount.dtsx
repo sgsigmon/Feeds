@@ -1,4 +1,4 @@
-﻿<?xml version="1.0"?>
+<?xml version="1.0"?>
 <DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
   DTS:refId="Package"
   DTS:CreationDate="10/30/2019 7:39:17 PM"
@@ -12,7 +12,7 @@
   DTS:ObjectName="02ODSTableLoadCounter"
   DTS:PackageType="5"
   DTS:VersionBuild="114"
-  DTS:VersionGUID="{ECADC3F5-7B02-4FC7-AEDF-54D08A7CA912}">
+  DTS:VersionGUID="{3BEF83E0-9AE1-4381-A390-19515201336B}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
